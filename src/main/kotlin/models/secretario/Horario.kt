@@ -1,8 +1,8 @@
 package models.secretario
 
-class Horario {
-    val tituloHorario = "Horario de mañana"
-    val horaInicio = "08:00"
-    val horaFin = "10:00"
-    val estadoHorario = true
-}
+class Horario(
+    val tituloHorario: String,
+    val horaInicio: String,
+    val horaFin: String,
+    val estadoHorario: Boolean
+)

@@ -1,10 +1,10 @@
 package models.administrativo
 
-class Brigada {
-    val _id = "BRIG123456789"
-    val nombreBrigada = "Perdomo"
-    val ubicacionBrigada = "Calle 26"
-    val estadoBrigada = true
-    val comandoId = "CMD123456789"
-    val unidades = listOf("Unidad 1 Perdomo", "Unidad 1 Paraiso")
-}
+class Brigada(
+    val id: String,
+    val nombreBrigada: String,
+    val ubicacionBrigada: String,
+    val estadoBrigada: Boolean,
+    val comandoId: String,
+    val unidades: List<String>
+)

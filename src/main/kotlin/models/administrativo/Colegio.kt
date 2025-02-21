@@ -1,9 +1,9 @@
 package models.administrativo
 
-class Colegio {
-    val _id = "COL123456789"
-    val nombreColegio = "Amistad"
-    val emailColegio = "colegio@gmail.com"
-    val estadoColegio = true
-    val estudiantes = listOf("Pedro Jimenez", "Carlos Castro")
-}
+class Colegio(
+    val id: String,
+    val nombreColegio: String,
+    val emailColegio: String,
+    val estadoColegio: Boolean,
+    val estudiantes: List<String>
+)
