@@ -1,8 +1,8 @@
 package models.questions
 
-class ConfirmarUsuario(val confirmacion: Boolean) {
+class ConfirmarUsuario() {
 
-    fun verificarEstado() {
+    fun verificarEstado(confirmacion: Boolean) {
         if (confirmacion) {
             println("Usuario Activo, Puede ingresar al programa")
         } else {
@@ -10,7 +10,7 @@ class ConfirmarUsuario(val confirmacion: Boolean) {
         }
     }
 
-    fun verificarRol() {
+    fun verificarRol(confirmacion: Boolean) {
         if (confirmacion) {
             println("Usted tiene el rol necesario para realizar la acción")
         } else {
