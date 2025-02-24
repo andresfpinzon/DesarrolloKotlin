@@ -18,4 +18,24 @@ class Estudiante(
     val calificaciones: List<String>,
     val asistencias: List<String>,
     val certificados: List<String>
-)
+) {
+    companion object {
+        val estudiante1 = Estudiante(
+            id = "1",
+            nombreEstudiante = "Juan",
+            apellidoEstudiante = "Perez",
+            correoEstudiante = "juan.perez@gmail.com",
+            tipoDocumento = "C.C",
+            numeroDocumento = "123456789",
+            fechaNacimiento = Date(2002,4,24),
+            generoEstudiante = "Masculino",
+            unidadId = "UN1018238",
+            colegioId = "C0L12381918",
+            estadoEstudiante = true,
+            ediciones = listOf("2025-1"),
+            calificaciones = listOf("CAL18270123"),
+            asistencias = listOf("ASIS12391723-91"),
+            certificados = listOf("CERT1293123801")
+        )
+    }
+}
