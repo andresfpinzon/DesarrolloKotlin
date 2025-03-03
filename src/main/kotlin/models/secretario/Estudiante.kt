@@ -37,5 +37,42 @@ class Estudiante(
             asistencias = listOf("ASIS12391723-91"),
             certificados = listOf("CERT1293123801")
         )
+
+        val estudiante2 = Estudiante(
+            id = "2",
+            nombreEstudiante = "Julian",
+            apellidoEstudiante = "Rivera",
+            correoEstudiante = "julian.rivera@gmail.com",
+            tipoDocumento = "C.C",
+            numeroDocumento = "123972123",
+            fechaNacimiento = Date(2005,3,30),
+            generoEstudiante = "Masculino",
+            unidadId = "UN1018238",
+            colegioId = "C0L12381918",
+            estadoEstudiante = true,
+            ediciones = listOf("2025-1"),
+            calificaciones = listOf("CAL18270321"),
+            asistencias = listOf("ASIS12391723-19"),
+            certificados = listOf("CERT1293123963")
+        )
+
+        val estudiante3 = Estudiante(
+            id = "2",
+            nombreEstudiante = "Andres",
+            apellidoEstudiante = "Pinzon",
+            correoEstudiante = "andres.pinzon@gmail.com",
+            tipoDocumento = "C.C",
+            numeroDocumento = "123972123",
+            fechaNacimiento = Date(1996,4,24),
+            generoEstudiante = "Masculino",
+            unidadId = "UN1018238",
+            colegioId = "C0L12381918",
+            estadoEstudiante = true,
+            ediciones = listOf("2025-1"),
+            calificaciones = listOf("CAL18270723"),
+            asistencias = listOf("ASIS12391723-46"),
+            certificados = listOf("CERT1293123753")
+        )
+
     }
 }

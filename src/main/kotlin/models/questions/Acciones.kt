@@ -8,7 +8,7 @@ class Acciones {
 
     companion object {
 
-        private val estudiantes = mutableListOf(Estudiante.estudiante1)
+        val estudiantes = mutableListOf(Estudiante.estudiante1)
 
         fun comprobarEstado(usuario: Usuario): Boolean {
             val confirmarUsuario = ConfirmarUsuario()
@@ -84,6 +84,24 @@ class Acciones {
             return usuarios.find { confirmarUsuario.verificarUsuario(correo, password, it) }
         }
 
+        fun calificarEstudiantes() {
+            val calificaciones = arrayOf(
+                mutableListOf("Andres", "Julian", "Santiago"),
+                mutableListOf(3, 5, 1)
+            )
+
+            for (i in calificaciones[0].indices) {
+                val nombre = calificaciones[0][i]
+                val calificacion = calificaciones[1][i]
+
+                if (calificacion > 3) {
+                    println("El estudiante $nombre aprobó")
+                } else {
+                    println("El estudiante $nombre no aprobó")
+                }
+            }
+        }
+
         fun menuServicios(usuario: Usuario) {
             var salir = false
             while (!salir) {
@@ -91,18 +109,21 @@ class Acciones {
                 println("Menú:")
                 println("1. Crear Estudiante")
                 println("2. Listar Estudiantes")
-                println("3. Salir")
+                println("3. Calificar Estudiantes")
+                println("4. Salir")
                 println("Seleccione una opción:")
                 when (readln()) {
                     "1" -> crearEstudiante(usuario)
                     "2" -> listarEstudiantes(usuario)
-                    "3" -> {
+                    "3" -> calificarEstudiantes()
+                    "4" -> {
                         println("Saliendo del sistema")
                         salir = true
                     }
-                    else -> println("Opcion no valida, por favor intente de nuevo.")
+                    else -> println("Opción no válida, por favor intente de nuevo.")
                 }
             }
         }
+
     }
 }
