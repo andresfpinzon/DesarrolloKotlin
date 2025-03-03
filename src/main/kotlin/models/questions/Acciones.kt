@@ -103,7 +103,7 @@ class Acciones {
 //        }
 
 //        fun calificarEstudiantes() {
-//            val calificaciones: Array<Array<Any>> = arrayOf(
+//            val calificaciones = arrayOf(
 //                arrayOf("Andres", "Julian", "Santiago"),
 //                arrayOf(3, 5, 1)
 //            )
@@ -119,8 +119,9 @@ class Acciones {
 //                }
 //            }
 //        }
+
 fun calificarEstudiantes() {
-    val calificaciones: Array<Array<Any>> = arrayOf(
+    val calificaciones = arrayOf(
         arrayOf(Estudiante.estudiante1, Estudiante.estudiante2, Estudiante.estudiante3),
         arrayOf(3, 5, 1)
     )
@@ -136,12 +137,6 @@ fun calificarEstudiantes() {
         }
     }
 }
-
-        fun main() {
-            calificarEstudiantes()
-        }
-
-
 
         fun menuServicios(usuario: Usuario) {
             var salir = false
