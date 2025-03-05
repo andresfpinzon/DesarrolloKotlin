@@ -5,4 +5,6 @@ class Fundacion(
     val nombreFundacion: String,
     val estadoFundacion: Boolean,
     val comando: List<String>
-)
+){
+    
+}
