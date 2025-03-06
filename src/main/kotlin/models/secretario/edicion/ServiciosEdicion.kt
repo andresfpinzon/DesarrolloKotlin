@@ -3,7 +3,7 @@ package models.secretario.edicion
 class ServiciosEdicion {
     private val ediciones = mutableListOf<ModeloEdicion>()
 
-    // Método para crear una nueva edición
+    // Metodo para crear una nueva edición
     fun crearEdicion() {
         println("Ingrese los datos de la edición:")
 
@@ -36,7 +36,7 @@ class ServiciosEdicion {
         println("Edición creada: $edicion")
     }
 
-    // Método para mostrar todas las ediciones
+    // Metodo para mostrar todas las ediciones
     fun mostrarEdiciones() {
         if (ediciones.isEmpty()) {
             println("No hay ediciones disponibles.")
@@ -48,7 +48,7 @@ class ServiciosEdicion {
         }
     }
 
-    // Método para actualizar una edición
+    // Metodo para actualizar una edición
     fun actualizarEdicion() {
         println("Ingrese el título de la edición a actualizar:")
         val titulo = readLine() ?: ""
@@ -91,7 +91,7 @@ class ServiciosEdicion {
         }
     }
 
-    // Método para eliminar una edición
+    // Metodo para eliminar una edición
     fun eliminarEdicion() {
         println("Ingrese el título de la edición a eliminar:")
         val titulo = readLine() ?: ""
