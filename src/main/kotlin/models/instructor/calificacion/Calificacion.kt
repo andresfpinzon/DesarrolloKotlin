@@ -10,7 +10,7 @@ class Calificacion(
 ) {
     companion object {
         val calificacion1 = Calificacion(
-            id = "CAL18270123",
+            id = "CAL01",
             tituloCalificacion = "Examen de Matemáticas",
             aprobado = true,
             usuarioId = "USR123456",
@@ -19,7 +19,7 @@ class Calificacion(
         )
 
         val calificacion2 = Calificacion(
-            id = "CAL18270321",
+            id = "CAL02",
             tituloCalificacion = "Examen de Ciencias",
             aprobado = false,
             usuarioId = "USR654321",

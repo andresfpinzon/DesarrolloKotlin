@@ -21,7 +21,7 @@ class Estudiante(
 ) {
     companion object {
         val estudiante1 = Estudiante(
-            id = "1",
+            id = "EST01",
             nombreEstudiante = "Juan",
             apellidoEstudiante = "Perez",
             correoEstudiante = "juan.perez@gmail.com",
@@ -39,7 +39,7 @@ class Estudiante(
         )
 
         val estudiante2 = Estudiante(
-            id = "2",
+            id = "EST02",
             nombreEstudiante = "Julian",
             apellidoEstudiante = "Rivera",
             correoEstudiante = "julian.rivera@gmail.com",
@@ -57,7 +57,7 @@ class Estudiante(
         )
 
         val estudiante3 = Estudiante(
-            id = "2",
+            id = "EST03",
             nombreEstudiante = "Andres",
             apellidoEstudiante = "Pinzon",
             correoEstudiante = "andres.pinzon@gmail.com",

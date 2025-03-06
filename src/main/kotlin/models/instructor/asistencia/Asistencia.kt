@@ -12,7 +12,7 @@ class Asistencia(
 ) {
     companion object {
         val asistencia1 = Asistencia(
-            id = "ASIS12391723-91",
+            id = "ASIS01",
             tituloAsistencia = "Clase de Matemáticas",
             fechaAsistencia = Date(2023, 10, 5),
             usuarioId = "USR123456",
@@ -21,7 +21,7 @@ class Asistencia(
         )
 
         val asistencia2 = Asistencia(
-            id = "ASIS12391723-19",
+            id = "ASIS02",
             tituloAsistencia = "Clase de Ciencias",
             fechaAsistencia = Date(2023, 10, 6),
             usuarioId = "USR654321",

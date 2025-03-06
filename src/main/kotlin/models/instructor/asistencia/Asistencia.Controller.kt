@@ -1,40 +1,48 @@
 package models.instructor.asistencia
 
 import java.util.Date
-
 import java.util.Scanner
 
-class AsistenciaController(){
+class AsistenciaController() {
 
-    companion object{
+    companion object {
 
         private val scanner = Scanner(System.`in`)
+
+        private fun confirmarAccion(mensaje: String): Boolean {
+            println("$mensaje (1: Sí, 2: No)")
+            return scanner.nextLine() == "1"
+        }
 
         fun crearAsistencia(asistencias: MutableList<Asistencia>) {
             println("Ingrese los datos de la asistencia:")
             print("ID: ")
-            val id = scanner.next()
+            val id = scanner.nextLine()
             print("Título: ")
-            val titulo = scanner.next()
+            val titulo = scanner.nextLine()
             print("Fecha (yyyy-MM-dd): ")
-            val fecha = Date(scanner.next())
+            val fecha = Date(scanner.nextLine())
             print("Usuario ID: ")
-            val usuarioId = scanner.next()
+            val usuarioId = scanner.nextLine()
             print("Estudiantes (separados por comas): ")
-            val estudiantes = scanner.next().split(",")
+            val estudiantes = scanner.nextLine().split(",")
 
-            try {
-                val nuevaAsistencia = AsistenciaServicio.crearAsistencia(
-                    asistencias = asistencias,
-                    id = id,
-                    tituloAsistencia = titulo,
-                    fechaAsistencia = fecha,
-                    usuarioId = usuarioId,
-                    estudiantes = estudiantes
-                )
-                println("Asistencia creada: $nuevaAsistencia")
-            } catch (e: IllegalArgumentException) {
-                println("Error: ${e.message}")
+            if (confirmarAccion("¿Desea crear esta asistencia?")) {
+                try {
+                    val nuevaAsistencia = AsistenciaServicio.crearAsistencia(
+                        asistencias = asistencias,
+                        id = id,
+                        tituloAsistencia = titulo,
+                        fechaAsistencia = fecha,
+                        usuarioId = usuarioId,
+                        estudiantes = estudiantes
+                    )
+                    println("Asistencia creada: $nuevaAsistencia")
+                } catch (e: IllegalArgumentException) {
+                    println("Error: ${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
 
@@ -50,7 +58,7 @@ class AsistenciaController(){
 
         fun actualizarAsistencia(asistencias: MutableList<Asistencia>) {
             print("Ingrese el ID de la asistencia a actualizar: ")
-            val id = scanner.next()
+            val id = scanner.nextLine()
 
             try {
                 val asistencia = AsistenciaServicio.obtenerAsistenciaPorId(asistencias, id)
@@ -65,15 +73,19 @@ class AsistenciaController(){
                 print("Nuevos estudiantes (separados por comas, dejar en blanco para no cambiar): ")
                 val estudiantes = scanner.nextLine().takeIf { it.isNotBlank() }?.split(",")
 
-                val asistenciaActualizada = AsistenciaServicio.actualizarAsistencia(
-                    asistencias = asistencias,
-                    id = id,
-                    tituloAsistencia = titulo,
-                    fechaAsistencia = fecha,
-                    usuarioId = usuarioId,
-                    estudiantes = estudiantes
-                )
-                println("Asistencia actualizada: $asistenciaActualizada")
+                if (confirmarAccion("¿Desea actualizar esta asistencia?")) {
+                    val asistenciaActualizada = AsistenciaServicio.actualizarAsistencia(
+                        asistencias = asistencias,
+                        id = id,
+                        tituloAsistencia = titulo,
+                        fechaAsistencia = fecha,
+                        usuarioId = usuarioId,
+                        estudiantes = estudiantes
+                    )
+                    println("Asistencia actualizada: $asistenciaActualizada")
+                } else {
+                    println("Operación cancelada.")
+                }
             } catch (e: NoSuchElementException) {
                 println("Error: ${e.message}")
             }
@@ -81,13 +93,17 @@ class AsistenciaController(){
 
         fun desactivarAsistencia(asistencias: MutableList<Asistencia>) {
             print("Ingrese el ID de la asistencia a desactivar: ")
-            val id = scanner.next()
+            val id = scanner.nextLine()
 
-            try {
-                val asistenciaDesactivada = AsistenciaServicio.desactivarAsistencia(asistencias, id)
-                println("Asistencia desactivada: $asistenciaDesactivada")
-            } catch (e: NoSuchElementException) {
-                println("Error: ${e.message}")
+            if (confirmarAccion("¿Desea desactivar esta asistencia?")) {
+                try {
+                    val asistenciaDesactivada = AsistenciaServicio.desactivarAsistencia(asistencias, id)
+                    println("Asistencia desactivada: $asistenciaDesactivada")
+                } catch (e: NoSuchElementException) {
+                    println("Error: ${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
     }

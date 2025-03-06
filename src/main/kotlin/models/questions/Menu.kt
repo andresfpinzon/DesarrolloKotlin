@@ -107,14 +107,14 @@ class Menu {
         private fun crudAuditoria() {
             println("Acciones CRUD para Auditoria:")
             println("1. Crear Auditoria")
-            println("2. Leer Auditoria")
+            println("2. Listar Auditorias")
             println("3. Actualizar Auditoria")
             println("4. Eliminar Auditoria")
             println("5. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
                 1 -> println("Crear Auditoria")
-                2 -> println("Leer Auditoria")
+                2 -> println("Listar Auditoria")
                 3 -> println("Actualizar Auditoria")
                 4 -> println("Eliminar Auditoria")
                 5 -> return
@@ -125,7 +125,7 @@ class Menu {
         private fun crudBrigada() {
             println("Acciones CRUD para Brigada:")
             println("1. Crear Brigada")
-            println("2. Leer Brigada")
+            println("2. Listar Brigadas")
             println("3. Actualizar Brigada")
             println("4. Eliminar Brigada")
             println("5. Volver")
@@ -143,7 +143,7 @@ class Menu {
         private fun crudCertificado() {
             println("Acciones CRUD para Certificado:")
             println("1. Crear Certificado")
-            println("2. Leer Certificado")
+            println("2. Listar Certificados")
             println("3. Actualizar Certificado")
             println("4. Eliminar Certificado")
             println("5. Volver")
@@ -161,7 +161,7 @@ class Menu {
         private fun crudColegio() {
             println("Acciones CRUD para Colegio:")
             println("1. Crear Colegio")
-            println("2. Leer Colegio")
+            println("2. Listar Colegios")
             println("3. Actualizar Colegio")
             println("4. Eliminar Colegio")
             println("5. Volver")
@@ -179,7 +179,7 @@ class Menu {
         private fun crudComando() {
             println("Acciones CRUD para Comando:")
             println("1. Crear Comando")
-            println("2. Leer Comando")
+            println("2. Listar Comandos")
             println("3. Actualizar Comando")
             println("4. Eliminar Comando")
             println("5. Volver")
@@ -197,7 +197,7 @@ class Menu {
         private fun crudUnidad() {
             println("Acciones CRUD para Unidad:")
             println("1. Crear Unidad")
-            println("2. Leer Unidad")
+            println("2. Listar Unidades")
             println("3. Actualizar Unidad")
             println("4. Eliminar Unidad")
             println("5. Volver")
@@ -215,7 +215,7 @@ class Menu {
         private fun crudUsuario() {
             println("Acciones CRUD para Usuario:")
             println("1. Crear Usuario")
-            println("2. Leer Usuario")
+            println("2. Listar Usuarios")
             println("3. Actualizar Usuario")
             println("4. Eliminar Usuario")
             println("5. Volver")
@@ -235,7 +235,7 @@ class Menu {
             while (true) {
                 println("Acciones CRUD para Asistencia:")
                 println("1. Crear Asistencia")
-                println("2. Leer Asistencias")
+                println("2. Listar Asistencias")
                 println("3. Actualizar Asistencia")
                 println("4. Desactivar Asistencia")
                 println("5. Volver")
@@ -256,7 +256,7 @@ class Menu {
             while (true) {
                 println("Acciones CRUD para Calificación:")
                 println("1. Crear Calificación")
-                println("2. Leer Calificaciones")
+                println("2. Listar Calificaciones")
                 println("3. Actualizar Calificación")
                 println("4. Desactivar Calificación")
                 println("5. Volver")
@@ -275,7 +275,7 @@ class Menu {
         private fun crudFundacion() {
             println("Acciones CRUD para Fundación:")
             println("1. Crear Fundación")
-            println("2. Leer Fundación")
+            println("2. Listar Fundaciónes")
             println("3. Actualizar Fundación")
             println("4. Eliminar Fundación")
             println("5. Volver")
@@ -295,7 +295,7 @@ class Menu {
             while (true) {
                 println("Acciones CRUD para Estudiante:")
                 println("1. Crear Estudiante")
-                println("2. Leer Estudiantes")
+                println("2. Listar Estudiantes")
                 println("3. Actualizar Estudiante")
                 println("4. Desactivar Estudiante")
                 println("5. Volver")
@@ -314,7 +314,7 @@ class Menu {
         private fun crudCurso() {
             println("Acciones CRUD para Curso:")
             println("1. Crear Curso")
-            println("2. Leer Curso")
+            println("2. Listar Cursos")
             println("3. Actualizar Curso")
             println("4. Eliminar Curso")
             println("5. Volver")
@@ -332,7 +332,7 @@ class Menu {
         private fun crudEdicion() {
             println("Acciones CRUD para Edición:")
             println("1. Crear Edición")
-            println("2. Leer Edición")
+            println("2. Listar Ediciónes")
             println("3. Actualizar Edición")
             println("4. Eliminar Edición")
             println("5. Volver")
@@ -350,7 +350,7 @@ class Menu {
         private fun crudHorario() {
             println("Acciones CRUD para Horario:")
             println("1. Crear Horario")
-            println("2. Leer Horario")
+            println("2. Listar Horarios")
             println("3. Actualizar Horario")
             println("4. Eliminar Horario")
             println("5. Volver")
@@ -366,6 +366,5 @@ class Menu {
         }
 
     }
-
 
 }
