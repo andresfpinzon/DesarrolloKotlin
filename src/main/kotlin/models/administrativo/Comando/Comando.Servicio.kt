@@ -30,7 +30,7 @@ class ComandoServicio(){
             comandos.add(nuevoComando)
             return nuevoComando
         }
-        fun listarComandosActivos(comandos: List<comando>): List<Comando> {
+        fun listarComandosActivos(comandos: List<Comando>): List<Comando> {
             return comandos.filter { it.estadoComando }
         }
         fun obtenerComandoPorId(comandos: List<Comando>, id: String): Comando {
