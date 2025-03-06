@@ -1,7 +1,7 @@
 package models.secretario.curso
 
 class ServiciosCurso {
-    private val cursos = mutableListOf<ModelCurso>()
+    private val cursos = mutableListOf<ModeloCurso>()
     private var contadorId = 4
 
     // Generar un ID único
@@ -29,7 +29,7 @@ class ServiciosCurso {
         val fundacionId = readLine() ?: ""
 
         val id = generarId()
-        val curso = ModelCurso(id, nombreCurso, descripcionCurso, intensidadHorariaCurso, estadoCurso, fundacionId, listOf())
+        val curso = ModeloCurso(id, nombreCurso, descripcionCurso, intensidadHorariaCurso, estadoCurso, fundacionId, listOf())
         cursos.add(curso)
 
         println("Curso agregado: $curso")
@@ -72,7 +72,7 @@ class ServiciosCurso {
             val nuevaFundacionId = readLine()?.takeIf { it.isNotBlank() }
 
             // Crear un nuevo objeto actualizado
-            val cursoActualizado = ModelCurso(
+            val cursoActualizado = ModeloCurso(
                 id = curso.id,
                 nombreCurso = nuevoNombre ?: curso.nombreCurso,
                 descripcionCurso = nuevaDescripcion ?: curso.descripcionCurso,

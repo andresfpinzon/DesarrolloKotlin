@@ -1,6 +1,6 @@
 package models.secretario.curso
 
-class ModelCurso(
+class ModeloCurso(
     val id: String,
     val nombreCurso: String,
     val descripcionCurso: String,
@@ -10,7 +10,7 @@ class ModelCurso(
     val ediciones: List<String>
 ){
 
-    val curso1 = ModelCurso(
+    val curso1 = ModeloCurso(
         id = "curso1",
         nombreCurso = "Primeros Auxilios Básicos",
         descripcionCurso = "Curso introductorio sobre primeros auxilios en situaciones de emergencia.",
@@ -20,7 +20,7 @@ class ModelCurso(
         ediciones = listOf("E101", "E102")
     )
 
-    val curso2 = ModelCurso(
+    val curso2 = ModeloCurso(
         id = "curso2",
         nombreCurso = "Reanimación Cardiopulmonar (RCP) y Uso del DEA",
         descripcionCurso = "Técnicas de RCP y uso del desfibrilador externo automático (DEA).",
@@ -30,7 +30,7 @@ class ModelCurso(
         ediciones = listOf("E201", "E202")
     )
 
-    val curso3 = ModelCurso(
+    val curso3 = ModeloCurso(
         id = "curso3",
         nombreCurso = "Atención de Emergencias y Traumatismos",
         descripcionCurso = "Manejo de heridas, fracturas y quemaduras en situaciones de emergencia.",
