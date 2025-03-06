@@ -1,5 +1,13 @@
 package models.questions
 
+import models.administrativo.Unidad.Unidad
+import models.administrativo.Comando.ComandoController
+import models.administrativo.Comando.Comando
+
+import models.administrativo.Colegio.Colegio
+import models.administrativo.Colegio.ColegioController
+
+import models.administrativo.Unidad.UnidadController
 import models.secretario.estudiante.Estudiante
 import models.secretario.estudiante.EstudianteController
 import models.instructor.calificacion.*
