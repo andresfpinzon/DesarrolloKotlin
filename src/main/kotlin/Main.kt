@@ -1,5 +1,6 @@
 import models.administrativo.SistemaDemo
 import models.administrativo.Usuario
+import models.administrativo.user.DemoUsuario
 import models.questions.Acciones
 
 fun main() {
@@ -22,7 +23,7 @@ fun main() {
 //    }
 
 
-    SistemaDemo.ejecutarDemo()
+    DemoUsuario.ejecutarDemoUsuario()
 
 
 }

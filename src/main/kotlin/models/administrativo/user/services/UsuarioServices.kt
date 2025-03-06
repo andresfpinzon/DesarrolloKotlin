@@ -87,6 +87,13 @@ class UsuarioServices(private val repository: UsuarioRepository) {
         return Result.success(usuario)
     }
 
+    fun buscarPorDocumento(documento: String): Result<Usuario>{
+        val usuario = repository.buscarPorNumeroDocumento(documento)
+            ?: return Result.failure(Exception("Usuario no encontrado..."))
+
+        return Result.success(usuario)
+    }
+
     // Función para validar el formato del correo electrónico
     private fun correoValido(correo: String): Boolean {
         val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
