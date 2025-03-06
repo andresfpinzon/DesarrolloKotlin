@@ -1,8 +1,4 @@
-import models.administrativo.SistemaDemo
-import models.administrativo.Usuario
-import models.administrativo.user.DemoUsuario
-import models.questions.Acciones
-
+import models.administrativo.DemoCertificado
 fun main() {
 
 //    val usuarios = listOf(Usuario.instructor, Usuario.secretario, Usuario.administrador)
@@ -23,7 +19,6 @@ fun main() {
 //    }
 
 
-    DemoUsuario.ejecutarDemoUsuario()
-
+    DemoCertificado.ejecutarDemo()
 
 }

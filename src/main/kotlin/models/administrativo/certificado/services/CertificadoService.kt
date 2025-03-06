@@ -1,8 +1,8 @@
 package models.administrativo.certificado.services
 
-import models.administrativo.certificado.model.Certificado
 import models.administrativo.certificado.repository.CertificadoRepository
 import models.administrativo.user.repository.UsuarioRepository
+import Certificado
 
 class CertificadoService(
     private val repository: CertificadoRepository,

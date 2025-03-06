@@ -1,6 +1,6 @@
 package models.administrativo.certificado.implement
 
-import models.administrativo.certificado.model.Certificado
+import Certificado
 import models.administrativo.certificado.repository.CertificadoRepository
 import java.util.UUID
 
@@ -8,7 +8,27 @@ class CertificadoRepositoryImpl : CertificadoRepository {
 
     private val certificadosDB = mutableMapOf<String, Certificado>()
 
+    init {
+        // Inicializar la base de datos con certificados predefinidos
+        agregarCertificadosIniciales()
+    }
+
+    private fun agregarCertificadosIniciales() {
+        // Cargar los certificados de ejemplo desde la clase Certificado
+        val certificadosIniciales = Certificado.certificados
+        // Añadir cada certificado a la base de datos
+        certificadosIniciales.forEach { certificado ->
+            certificadosDB[certificado.id] = certificado
+        }
+    }
+
     override fun crear(certificado: Certificado): Certificado {
+        // Verificar si ya existe un certificado con el mismo código de verificación
+        val codigoExistente = buscarPorCodigoVerificacion(certificado.codigoVerificacion)
+        if (codigoExistente != null) {
+            throw IllegalArgumentException("Ya existe un certificado con el código de verificación ${certificado.codigoVerificacion}")
+        }
+
         val id = if(certificado.id.isBlank()) UUID.randomUUID().toString() else certificado.id
 
         val nuevoCertificado = Certificado(
@@ -22,7 +42,7 @@ class CertificadoRepositoryImpl : CertificadoRepository {
             estadoCertificado = certificado.estadoCertificado
         )
         certificadosDB[id] = nuevoCertificado
-        return  nuevoCertificado
+        return nuevoCertificado
     }
 
     override fun obtenerPorId(id: String): Certificado? {
@@ -36,6 +56,12 @@ class CertificadoRepositoryImpl : CertificadoRepository {
     override fun actualizar(id: String, certificado: Certificado): Certificado? {
         if (!certificadosDB.containsKey(id)) {
             return null
+        }
+
+        // Verificar que el código de verificación no esté siendo usado por otro certificado
+        val codigoExistente = buscarPorCodigoVerificacion(certificado.codigoVerificacion)
+        if (codigoExistente != null && codigoExistente.id != id) {
+            throw IllegalArgumentException("Ya existe otro certificado con el código de verificación ${certificado.codigoVerificacion}")
         }
 
         val certificadoActualizado = Certificado(
@@ -67,5 +93,13 @@ class CertificadoRepositoryImpl : CertificadoRepository {
 
     override fun buscarPorCodigoVerificacion(codigo: String): Certificado? {
         return certificadosDB.values.find { it.codigoVerificacion == codigo }
+    }
+
+    override fun buscarPorUsuarioId(usuarioId: String): List<Certificado> {
+        return certificadosDB.values.filter { it.usuarioId == usuarioId }
+    }
+
+    override fun certificadosActivos(): List<Certificado> {
+        return certificadosDB.values.filter { it.estadoCertificado }
     }
 }
