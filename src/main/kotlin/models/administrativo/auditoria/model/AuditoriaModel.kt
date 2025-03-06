@@ -1,4 +1,4 @@
-package models.administrativo.auditoria
+package models.administrativo.auditoria.model
 
 import java.sql.Date
 
