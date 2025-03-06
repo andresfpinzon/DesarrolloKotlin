@@ -1,0 +1,94 @@
+package models.instructor.calificacion
+
+
+
+import java.util.Scanner
+
+class CalificacionController() {
+
+    companion object {
+
+        private val scanner = Scanner(System.`in`)
+
+        fun crearCalificacion(calificaciones: MutableList<Calificacion>) {
+            println("Ingrese los datos de la calificación:")
+            print("ID: ")
+            val id = scanner.next()
+            print("Título: ")
+            val titulo = scanner.next()
+            print("Aprobado (true/false): ")
+            val aprobado = scanner.nextBoolean()
+            print("Usuario ID: ")
+            val usuarioId = scanner.next()
+            print("Estudiantes (separados por comas): ")
+            val estudiantes = scanner.next().split(",")
+
+            try {
+                val nuevaCalificacion = CalificacionServicios.crearCalificacion(
+                    calificaciones = calificaciones,
+                    id = id,
+                    tituloCalificacion = titulo,
+                    aprobado = aprobado,
+                    usuarioId = usuarioId,
+                    estudiantes = estudiantes
+                )
+                println("Calificación creada: $nuevaCalificacion")
+            } catch (e: IllegalArgumentException) {
+                println("Error: \${e.message}")
+            }
+        }
+
+        fun listarCalificacionesActivas(calificaciones: List<Calificacion>) {
+            val calificacionesActivas = CalificacionServicios.listarCalificacionesActivas(calificaciones)
+            if (calificacionesActivas.isEmpty()) {
+                println("No hay calificaciones activas.")
+            } else {
+                println("Calificaciones activas:")
+                calificacionesActivas.forEach { println(it) }
+            }
+        }
+
+        fun actualizarCalificacion(calificaciones: MutableList<Calificacion>) {
+            print("Ingrese el ID de la calificación a actualizar: ")
+            val id = scanner.next()
+
+            try {
+                val calificacion = CalificacionServicios.buscarCalificacionPorId(calificaciones, id)
+                println("Calificación encontrada: $calificacion")
+
+                print("Nuevo título (dejar en blanco para no cambiar): ")
+                val titulo = scanner.nextLine().takeIf { it.isNotBlank() }
+                print("Nuevo estado de aprobación (true/false, dejar en blanco para no cambiar): ")
+                val aprobado = scanner.nextLine().takeIf { it.isNotBlank() }?.toBoolean()
+                print("Nuevo usuario ID (dejar en blanco para no cambiar): ")
+                val usuarioId = scanner.nextLine().takeIf { it.isNotBlank() }
+                print("Nuevos estudiantes (separados por comas, dejar en blanco para no cambiar): ")
+                val estudiantes = scanner.nextLine().takeIf { it.isNotBlank() }?.split(",")
+
+                val calificacionActualizada = CalificacionServicios.actualizarCalificacion(
+                    calificaciones = calificaciones,
+                    id = id,
+                    tituloCalificacion = titulo,
+                    aprobado = aprobado,
+                    usuarioId = usuarioId,
+                    estudiantes = estudiantes
+                )
+                println("Calificación actualizada: $calificacionActualizada")
+            } catch (e: NoSuchElementException) {
+                println("Error: \${e.message}")
+            }
+        }
+
+        fun desactivarCalificacion(calificaciones: MutableList<Calificacion>) {
+            print("Ingrese el ID de la calificación a desactivar: ")
+            val id = scanner.next()
+
+            try {
+                val calificacionDesactivada = CalificacionServicios.desactivarCalificacion(calificaciones, id)
+                println("Calificación desactivada: $calificacionDesactivada")
+            } catch (e: NoSuchElementException) {
+                println("Error: \${e.message}")
+            }
+        }
+    }
+}

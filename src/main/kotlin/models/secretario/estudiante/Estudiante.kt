@@ -1,23 +1,23 @@
-package models.secretario
+package models.secretario.estudiante
 
 import java.util.Date
 
 class Estudiante(
     val id: String,
-    val nombreEstudiante: String,
-    val apellidoEstudiante: String,
-    val correoEstudiante: String,
-    val tipoDocumento: String,
-    val numeroDocumento: String,
-    val fechaNacimiento: Date,
-    val generoEstudiante: String,
-    val unidadId: String,
-    val colegioId: String,
-    val estadoEstudiante: Boolean,
-    val ediciones: List<String>,
-    val calificaciones: List<String>,
-    val asistencias: List<String>,
-    val certificados: List<String>
+    var nombreEstudiante: String,
+    var apellidoEstudiante: String,
+    var correoEstudiante: String,
+    var tipoDocumento: String,
+    var numeroDocumento: String,
+    var fechaNacimiento: Date,
+    var generoEstudiante: String,
+    var unidadId: String,
+    var colegioId: String,
+    var estadoEstudiante: Boolean,
+    var ediciones: List<String>,
+    var calificaciones: List<String>,
+    var asistencias: List<String>,
+    var certificados: List<String>
 ) {
     companion object {
         val estudiante1 = Estudiante(

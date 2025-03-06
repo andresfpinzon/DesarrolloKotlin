@@ -1,6 +1,6 @@
 package models.questions
 import models.administrativo.Usuario
-import models.secretario.Estudiante
+import models.secretario.estudiante.Estudiante
 
 import java.util.Date
 
@@ -84,59 +84,24 @@ class Acciones {
             return usuarios.find { confirmarUsuario.verificarUsuario(correo, password, it) }
         }
 
-//        fun calificarEstudiantes() {
-//            val calificaciones = arrayOf(
-//                mutableListOf("Andres", "Julian", "Santiago"),
-//                mutableListOf(3, 5, 1)
-//            )
-//
-//            for (i in calificaciones[0].indices) {
-//                val nombre = calificaciones[0][i]
-//                val calificacion = calificaciones[1][i]
-//
-//                if (calificacion > 3) {
-//                    println("El estudiante $nombre aprobó")
-//                } else {
-//                    println("El estudiante $nombre no aprobó")
-//                }
-//            }
-//        }
 
-//        fun calificarEstudiantes() {
-//            val calificaciones = arrayOf(
-//                arrayOf("Andres", "Julian", "Santiago"),
-//                arrayOf(3, 5, 1)
-//            )
-//
-//            for (i in calificaciones[0].indices) {
-//                val nombre = calificaciones[0][i] as String
-//                val calificacion = calificaciones[1][i] as Int
-//
-//                if (calificacion > 3) {
-//                    println("El estudiante $nombre aprobó")
-//                } else {
-//                    println("El estudiante $nombre no aprobó")
-//                }
-//            }
-//        }
+        fun calificarEstudiantes() {
+            val calificaciones = arrayOf(
+                arrayOf(Estudiante.estudiante1, Estudiante.estudiante2, Estudiante.estudiante3),
+                arrayOf(3, 5, 1)
+            )
 
-fun calificarEstudiantes() {
-    val calificaciones = arrayOf(
-        arrayOf(Estudiante.estudiante1, Estudiante.estudiante2, Estudiante.estudiante3),
-        arrayOf(3, 5, 1)
-    )
+            for (i in calificaciones[0].indices) {
+                val estudiante = calificaciones[0][i] as Estudiante
+                val calificacion = calificaciones[1][i] as Int
 
-    for (i in calificaciones[0].indices) {
-        val estudiante = calificaciones[0][i] as Estudiante
-        val calificacion = calificaciones[1][i] as Int
-
-        if (calificacion > 3) {
-            println("El estudiante ${estudiante.nombreEstudiante} aprobó con una nota de $calificacion")
-        } else {
-            println("El estudiante ${estudiante.nombreEstudiante} no aprobó con una nota de $calificacion")
+                if (calificacion > 3) {
+                    println("El estudiante ${estudiante.nombreEstudiante} aprobó con una nota de $calificacion")
+                } else {
+                    println("El estudiante ${estudiante.nombreEstudiante} no aprobó con una nota de $calificacion")
+                }
+            }
         }
-    }
-}
 
         fun menuServicios(usuario: Usuario) {
             var salir = false
