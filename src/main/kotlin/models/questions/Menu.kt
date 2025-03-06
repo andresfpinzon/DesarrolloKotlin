@@ -1,6 +1,7 @@
 package models.questions
 
-import models.secretario.estudiante.*
+import models.secretario.estudiante.Estudiante
+import models.secretario.estudiante.EstudianteController
 import models.instructor.calificacion.*
 import models.instructor.asistencia.AsistenciaController
 import models.instructor.asistencia.Asistencia
@@ -251,7 +252,7 @@ class Menu {
         }
 
         private fun crudCalificacion() {
-            val calificaciones = mutableListOf<Calificacion>(Calificacion.calificacion1, Calificacion.calificacion2)
+            val calificaciones = mutableListOf(Calificacion.calificacion1, Calificacion.calificacion2)
             while (true) {
                 println("Acciones CRUD para Calificación:")
                 println("1. Crear Calificación")
@@ -290,7 +291,7 @@ class Menu {
         }
 
         private fun crudEstudiante() {
-            val estudiantes = mutableListOf<Estudiante>()
+            val estudiantes = mutableListOf(Estudiante.estudiante1, Estudiante.estudiante2, Estudiante.estudiante3)
             while (true) {
                 println("Acciones CRUD para Estudiante:")
                 println("1. Crear Estudiante")
@@ -300,18 +301,10 @@ class Menu {
                 println("5. Volver")
                 print("Opción: ")
                 when (scanner.nextInt()) {
-                    1 -> {
-                        println("Ingrese los datos del estudiante:")
-                    }
-                    2 -> {
-                        println("Listando estudiantes:")
-                    }
-                    3 -> {
-                        println("Actualizando estudiante:")
-                    }
-                    4 -> {
-                        println("Desactivando estudiante:")
-                    }
+                    1 -> EstudianteController.crearEstudiante(estudiantes)
+                    2 -> EstudianteController.listarEstudiantes(estudiantes)
+                    3 -> EstudianteController.actualizarEstudiante(estudiantes)
+                    4 -> EstudianteController.desactivarEstudiante(estudiantes)
                     5 -> return
                     else -> println("Opción no válida, intente de nuevo.")
                 }
