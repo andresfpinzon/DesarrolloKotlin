@@ -6,6 +6,18 @@ import models.instructor.calificacion.*
 import models.instructor.asistencia.AsistenciaController
 import models.instructor.asistencia.Asistencia
 
+import models.administrativo.Comando.Comando
+import models.administrativo.Comando.ComandoController
+
+import models.administrativo.Brigada.Brigada
+import models.administrativo.Brigada.BrigadaController
+
+import models.administrativo.Unidad.Unidad
+import models.administrativo.Unidad.UnidadController
+
+import models.administrativo.colegio.
+
+
 import models.instructor.calificacion.CalificacionController
 import models.instructor.calificacion.Calificacion
 
