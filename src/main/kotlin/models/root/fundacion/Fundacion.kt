@@ -1,4 +1,4 @@
-package models.root
+package models.root.fundacion
 
 class Fundacion(
     val id: String,
@@ -6,5 +6,5 @@ class Fundacion(
     val estadoFundacion: Boolean,
     val comando: List<String>
 ){
-    
+
 }

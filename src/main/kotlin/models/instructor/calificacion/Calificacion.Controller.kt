@@ -2,6 +2,8 @@ package models.instructor.calificacion
 
 
 
+import models.instructor.asistencia.AsistenciaController
+import models.instructor.asistencia.AsistenciaController.Companion
 import java.util.Scanner
 
 class CalificacionController() {
@@ -9,6 +11,11 @@ class CalificacionController() {
     companion object {
 
         private val scanner = Scanner(System.`in`)
+
+        private fun confirmarAccion(mensaje: String): Boolean {
+            println("$mensaje (1: Sí, 2: No)")
+            return scanner.nextLine() == "1"
+        }
 
         fun crearCalificacion(calificaciones: MutableList<Calificacion>) {
             println("Ingrese los datos de la calificación:")
@@ -23,18 +30,22 @@ class CalificacionController() {
             print("Estudiantes (separados por comas): ")
             val estudiantes = scanner.next().split(",")
 
-            try {
-                val nuevaCalificacion = CalificacionServicios.crearCalificacion(
-                    calificaciones = calificaciones,
-                    id = id,
-                    tituloCalificacion = titulo,
-                    aprobado = aprobado,
-                    usuarioId = usuarioId,
-                    estudiantes = estudiantes
-                )
-                println("Calificación creada: $nuevaCalificacion")
-            } catch (e: IllegalArgumentException) {
-                println("Error: \${e.message}")
+            if (confirmarAccion("¿Desea crear esta calificacion?")) {
+                try {
+                    val nuevaCalificacion = CalificacionServicios.crearCalificacion(
+                        calificaciones = calificaciones,
+                        id = id,
+                        tituloCalificacion = titulo,
+                        aprobado = aprobado,
+                        usuarioId = usuarioId,
+                        estudiantes = estudiantes
+                    )
+                    println("Calificación creada: $nuevaCalificacion")
+                } catch (e: IllegalArgumentException) {
+                    println("Error: \${e.message}")
+                }
+            }else {
+                println("Operación cancelada.")
             }
         }
 
@@ -65,15 +76,20 @@ class CalificacionController() {
                 print("Nuevos estudiantes (separados por comas, dejar en blanco para no cambiar): ")
                 val estudiantes = scanner.nextLine().takeIf { it.isNotBlank() }?.split(",")
 
-                val calificacionActualizada = CalificacionServicios.actualizarCalificacion(
-                    calificaciones = calificaciones,
-                    id = id,
-                    tituloCalificacion = titulo,
-                    aprobado = aprobado,
-                    usuarioId = usuarioId,
-                    estudiantes = estudiantes
-                )
-                println("Calificación actualizada: $calificacionActualizada")
+                if (confirmarAccion("¿Desea actualizar esta calificacion?")) {
+                    val calificacionActualizada = CalificacionServicios.actualizarCalificacion(
+                        calificaciones = calificaciones,
+                        id = id,
+                        tituloCalificacion = titulo,
+                        aprobado = aprobado,
+                        usuarioId = usuarioId,
+                        estudiantes = estudiantes
+                    )
+                    println("Calificación actualizada: $calificacionActualizada")
+                }else {
+                    println("Operación cancelada.")
+                }
+
             } catch (e: NoSuchElementException) {
                 println("Error: \${e.message}")
             }
@@ -82,12 +98,15 @@ class CalificacionController() {
         fun desactivarCalificacion(calificaciones: MutableList<Calificacion>) {
             print("Ingrese el ID de la calificación a desactivar: ")
             val id = scanner.next()
-
-            try {
-                val calificacionDesactivada = CalificacionServicios.desactivarCalificacion(calificaciones, id)
-                println("Calificación desactivada: $calificacionDesactivada")
-            } catch (e: NoSuchElementException) {
-                println("Error: \${e.message}")
+            if (confirmarAccion("¿Desea desactivar esta caificacion?")){
+                try {
+                    val calificacionDesactivada = CalificacionServicios.desactivarCalificacion(calificaciones, id)
+                    println("Calificación desactivada: $calificacionDesactivada")
+                } catch (e: NoSuchElementException) {
+                    println("Error: \${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
     }

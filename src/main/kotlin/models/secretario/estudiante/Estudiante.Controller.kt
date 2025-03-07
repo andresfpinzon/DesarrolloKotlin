@@ -1,5 +1,6 @@
 package models.secretario.estudiante
 
+
 import java.util.*
 import java.util.Scanner
 
@@ -8,6 +9,11 @@ class EstudianteController() {
     companion object {
 
         private val scanner = Scanner(System.`in`)
+
+        private fun confirmarAccion(mensaje: String): Boolean {
+            println("$mensaje (1: Sí, 2: No)")
+            return scanner.nextLine() == "1"
+        }
 
         fun crearEstudiante(estudiantes: MutableList<Estudiante>) {
             println("Ingrese los datos del estudiante:")
@@ -42,28 +48,32 @@ class EstudianteController() {
             print("Certificados (separados por comas): ")
             val certificados = scanner.next().split(",")
 
-            try {
-                val nuevoEstudiante = EstudianteServicio.crearEstudiante(
-                    estudiantes = estudiantes,
-                    id = id,
-                    nombreEstudiante = nombre,
-                    apellidoEstudiante = apellido,
-                    correoEstudiante = correo,
-                    tipoDocumento = tipoDocumento,
-                    numeroDocumento = numeroDocumento,
-                    fechaNacimiento = fechaNacimiento,
-                    generoEstudiante = genero,
-                    unidadId = unidadId,
-                    colegioId = colegioId,
-                    estadoEstudiante = estadoEstudiante,
-                    ediciones = ediciones,
-                    calificaciones = calificaciones,
-                    asistencias = asistencias,
-                    certificados = certificados
-                )
-                println("Estudiante creado: $nuevoEstudiante")
-            } catch (e: IllegalArgumentException) {
-                println("Error: \${e.message}")
+            if (confirmarAccion("¿Desea crear este estudiante?")){
+                try {
+                    val nuevoEstudiante = EstudianteServicio.crearEstudiante(
+                        estudiantes = estudiantes,
+                        id = id,
+                        nombreEstudiante = nombre,
+                        apellidoEstudiante = apellido,
+                        correoEstudiante = correo,
+                        tipoDocumento = tipoDocumento,
+                        numeroDocumento = numeroDocumento,
+                        fechaNacimiento = fechaNacimiento,
+                        generoEstudiante = genero,
+                        unidadId = unidadId,
+                        colegioId = colegioId,
+                        estadoEstudiante = estadoEstudiante,
+                        ediciones = ediciones,
+                        calificaciones = calificaciones,
+                        asistencias = asistencias,
+                        certificados = certificados
+                    )
+                    println("Estudiante creado: $nuevoEstudiante")
+                } catch (e: IllegalArgumentException) {
+                    println("Error: \${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
 
@@ -113,11 +123,16 @@ class EstudianteController() {
                 print("Nuevos certificados (separados por comas, dejar en blanco para no cambiar): ")
                 val certificados = scanner.nextLine().takeIf { it.isNotBlank() }?.split(",")
 
-                val estudianteActualizado = EstudianteServicio.actualizarEstudiante(
-                    estudiantes, id, nombre, apellido, correo, tipoDocumento, numeroDocumento, fechaNacimiento,
-                    genero, unidadId, colegioId, estadoEstudiante, ediciones, calificaciones, asistencias, certificados
-                )
-                println("Estudiante actualizado: $estudianteActualizado")
+                if (confirmarAccion("¿Desea actualizar este estudiante?")){
+                    val estudianteActualizado = EstudianteServicio.actualizarEstudiante(
+                        estudiantes, id, nombre, apellido, correo, tipoDocumento, numeroDocumento, fechaNacimiento,
+                        genero, unidadId, colegioId, estadoEstudiante, ediciones, calificaciones, asistencias, certificados
+                    )
+                    println("Estudiante actualizado: $estudianteActualizado")
+                }else {
+                    println("Operación cancelada.")
+                }
+
             } catch (e: NoSuchElementException) {
                 println("Error: \${e.message}")
             }
@@ -126,12 +141,15 @@ class EstudianteController() {
         fun desactivarEstudiante(estudiantes: MutableList<Estudiante>) {
             print("Ingrese el ID del estudiante a desactivar: ")
             val id = scanner.next()
-
-            try {
-                val estudianteDesactivado = EstudianteServicio.desactivarEstudiante(estudiantes, id)
-                println("Estudiante desactivado: $estudianteDesactivado")
-            } catch (e: NoSuchElementException) {
-                println("Error: \${e.message}")
+            if (confirmarAccion("¿Desea desactivar este estudiante?")){
+                try {
+                    val estudianteDesactivado = EstudianteServicio.desactivarEstudiante(estudiantes, id)
+                    println("Estudiante desactivado: $estudianteDesactivado")
+                } catch (e: NoSuchElementException) {
+                    println("Error: \${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
     }
