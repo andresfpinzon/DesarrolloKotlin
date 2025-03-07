@@ -2,11 +2,16 @@ package models.administrativo.Unidad
 
 import java.util.Scanner
 
-class UnidadController(){
+class UnidadController() {
 
-    companion object{
+    companion object {
 
         private val scanner = Scanner(System.`in`)
+
+        private fun confirmarAccion(mensaje: String): Boolean {
+            println("$mensaje (1: Sí, 2: No)")
+            return scanner.nextLine() == "1"
+        }
 
         fun crearUnidad(unidades: MutableList<Unidad>) {
             println("Ingrese los datos de la unidad:")
@@ -21,18 +26,22 @@ class UnidadController(){
             print("Estudiantes (separados por comas): ")
             val estudiantes = scanner.next().split(",")
 
-            try {
-                val nuevaUnidad = UnidadServicio.crearUnidad(
-                    unidades = unidades,
-                    id = id,
-                    nombreUnidad = nombre,
-                    brigadaId = brigadaId,
-                    usuarioId = usuarioId,
-                    estudiantes = estudiantes
-                )
-                println("Unidad creada: $nuevaUnidad")
-            } catch (e: IllegalArgumentException) {
-                println("Error: ${e.message}")
+            if (confirmarAccion("¿Desea crear esta unidad?")) {
+                try {
+                    val nuevaUnidad = UnidadServicio.crearUnidad(
+                        unidades = unidades,
+                        id = id,
+                        nombreUnidad = nombre,
+                        brigadaId = brigadaId,
+                        usuarioId = usuarioId,
+                        estudiantes = estudiantes
+                    )
+                    println("Unidad creada: $nuevaUnidad")
+                } catch (e: IllegalArgumentException) {
+                    println("Error: ${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
 
@@ -63,16 +72,19 @@ class UnidadController(){
                 print("Nuevos estudiantes (dejar en blanco para no cambiar): ")
                 val estudiantes = scanner.next().split(",").takeIf { it.isNotEmpty() }
 
-                val unidadActualizada = UnidadServicio.actualizarUnidad(
-                    unidades = unidades,
-                    id = id,
-                    nombreUnidad = nombre,
-                    brigadaId = brigadaId,
-                    usuarioId = usuarioId,
-                    estudiantes = estudiantes
-                )
-
-                println("Unidad actualizada: $unidadActualizada")
+                if (confirmarAccion("¿Desea actualizar esta unidad?")) {
+                    val unidadActualizada = UnidadServicio.actualizarUnidad(
+                        unidades = unidades,
+                        id = id,
+                        nombreUnidad = nombre,
+                        brigadaId = brigadaId,
+                        usuarioId = usuarioId,
+                        estudiantes = estudiantes
+                    )
+                    println("Unidad actualizada: $unidadActualizada")
+                } else {
+                    println("Operación cancelada.")
+                }
             } catch (e: NoSuchElementException) {
                 println("Error: ${e.message}")
             }
@@ -82,11 +94,15 @@ class UnidadController(){
             print("Ingrese el ID de la unidad a desactivar: ")
             val id = scanner.next()
 
-            try {
-                val unidadDesactivada = UnidadServicio.desactivarUnidad(unidades, id)
-                println("Unidad desactivada: $unidadDesactivada")
-            } catch (e: NoSuchElementException) {
-                println("Error: ${e.message}")
+            if (confirmarAccion("¿Desea desactivar esta unidad?")) {
+                try {
+                    val unidadDesactivada = UnidadServicio.desactivarUnidad(unidades, id)
+                    println("Unidad desactivada: $unidadDesactivada")
+                } catch (e: NoSuchElementException) {
+                    println("Error: ${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
     }

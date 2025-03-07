@@ -2,11 +2,16 @@ package models.administrativo.Comando
 
 import java.util.Scanner
 
-class ComandoController(){
+class ComandoController() {
 
-    companion object{
+    companion object {
 
         private val scanner = Scanner(System.`in`)
+
+        private fun confirmarAccion(mensaje: String): Boolean {
+            println("$mensaje (1: Sí, 2: No)")
+            return scanner.nextLine() == "1"
+        }
 
         fun crearComando(comandos: MutableList<Comando>) {
             println("Ingrese los datos del comando:")
@@ -23,21 +28,26 @@ class ComandoController(){
             print("Brigadas (separadas por comas): ")
             val brigadas = scanner.next().split(",")
 
-            try {
-                val nuevoComando = ComandoServicio.crearComando(
-                    comandos = comandos,
-                    id = id,
-                    nombreComando = nombre,
-                    estadoComando = estado,
-                    ubicacionComando = ubicacion,
-                    fundacionId = fundacionId,
-                    brigadas = brigadas
-                )
-                println("Comando creado: $nuevoComando")
-            } catch (e: IllegalArgumentException) {
-                println("Error: ${e.message}")
+            if (confirmarAccion("¿Desea crear este comando?")) {
+                try {
+                    val nuevoComando = ComandoServicio.crearComando(
+                        comandos = comandos,
+                        id = id,
+                        nombreComando = nombre,
+                        estadoComando = estado,
+                        ubicacionComando = ubicacion,
+                        fundacionId = fundacionId,
+                        brigadas = brigadas
+                    )
+                    println("Comando creado: $nuevoComando")
+                } catch (e: IllegalArgumentException) {
+                    println("Error: ${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
+
         fun listarComandosActivos(comandos: List<Comando>) {
             val comandosActivos = ComandoServicio.listarComandosActivos(comandos)
             if (comandosActivos.isEmpty()) {
@@ -47,7 +57,8 @@ class ComandoController(){
                 comandosActivos.forEach { println(it) }
             }
         }
-        fun actualizarComando(comandos: MutableList<Comando>){
+
+        fun actualizarComando(comandos: MutableList<Comando>) {
             print("Ingrese el ID del comando a actualizar: ")
             val id = scanner.next()
             scanner.nextLine() // Consumir la nueva línea pendiente
@@ -67,30 +78,38 @@ class ComandoController(){
                 print("Nuevas brigadas (separadas por comas, dejar en blanco para no cambiar): ")
                 val brigadas = scanner.nextLine().takeIf { it.isNotBlank() }?.split(",")
 
-                val comandoActualizado = ComandoServicio.actualizarComando(
-                    comandos = comandos,
-                    id = id,
-                    nombreComando = nombre,
-                    estadoComando = estado,
-                    ubicacionComando = ubicacion,
-                    fundacionId = fundacionId,
-                    brigadas = brigadas
-                )
-                println("Comando actualizado: $comandoActualizado")
+                if (confirmarAccion("¿Desea actualizar este comando?")) {
+                    val comandoActualizado = ComandoServicio.actualizarComando(
+                        comandos = comandos,
+                        id = id,
+                        nombreComando = nombre,
+                        estadoComando = estado,
+                        ubicacionComando = ubicacion,
+                        fundacionId = fundacionId,
+                        brigadas = brigadas
+                    )
+                    println("Comando actualizado: $comandoActualizado")
+                } else {
+                    println("Operación cancelada.")
+                }
             } catch (e: NoSuchElementException) {
                 println("Error: ${e.message}")
             }
         }
 
-        fun desactivarComando(comandos: MutableList<Comando>){
+        fun desactivarComando(comandos: MutableList<Comando>) {
             print("Ingrese el ID del comando a desactivar: ")
             val id = scanner.next()
 
-            try {
-                val comandoDesactivado = ComandoServicio.desactivarComando(comandos, id)
-                println("Comando desactivado: $comandoDesactivado")
-            } catch (e: NoSuchElementException) {
-                println("Error: ${e.message}")
+            if (confirmarAccion("¿Desea desactivar este comando?")) {
+                try {
+                    val comandoDesactivado = ComandoServicio.desactivarComando(comandos, id)
+                    println("Comando desactivado: $comandoDesactivado")
+                } catch (e: NoSuchElementException) {
+                    println("Error: ${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
     }
