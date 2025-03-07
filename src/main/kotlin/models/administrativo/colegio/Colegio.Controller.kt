@@ -2,11 +2,16 @@ package models.administrativo.colegio
 
 import java.util.Scanner
 
-class ColegioController(){
+class ColegioController() {
 
-    companion object{
+    companion object {
 
         private val scanner = Scanner(System.`in`)
+
+        private fun confirmarAccion(mensaje: String): Boolean {
+            println("$mensaje (1: Sí, 2: No)")
+            return scanner.nextLine() == "1"
+        }
 
         fun crearColegio(colegios: MutableList<Colegio>) {
             println("Ingrese los datos del colegio:")
@@ -19,17 +24,21 @@ class ColegioController(){
             print("Estudiantes (separados por comas): ")
             val estudiantes = scanner.next().split(",")
 
-            try {
-                val nuevoColegio = ColegioServicio.crearColegio(
-                    colegios = colegios,
-                    id = id,
-                    nombreColegio = nombre,
-                    emailColegio = email,
-                    estudiantes = estudiantes
-                )
-                println("Colegio creado: $nuevoColegio")
-            } catch (e: IllegalArgumentException) {
-                println("Error: ${e.message}")
+            if (confirmarAccion("¿Desea crear este colegio?")) {
+                try {
+                    val nuevoColegio = ColegioServicio.crearColegio(
+                        colegios = colegios,
+                        id = id,
+                        nombreColegio = nombre,
+                        emailColegio = email,
+                        estudiantes = estudiantes
+                    )
+                    println("Colegio creado: $nuevoColegio")
+                } catch (e: IllegalArgumentException) {
+                    println("Error: ${e.message}")
+                }
+            } else {
+                println("Operación cancelada.")
             }
         }
 
@@ -60,24 +69,27 @@ class ColegioController(){
                 print("Nuevos estudiantes (dejar en blanco para no cambiar): ")
                 val estudiantes = scanner.nextLine().split(",").takeIf { it.isNotEmpty() }
 
-                val colegioActualizado = ColegioServicio.actualizarColegio(
-                    colegios = colegios,
-                    id = id,
-                    nombreColegio = nombre,
-                    emailColegio = email,
-                    estadoColegio = estado,
-                    estudiantes = estudiantes
-                )
-                println("Colegio actualizado: $colegioActualizado")
+                if (confirmarAccion("¿Desea actualizar este colegio?")) {
+                    val colegioActualizado = ColegioServicio.actualizarColegio(
+                        colegios = colegios,
+                        id = id,
+                        nombreColegio = nombre,
+                        emailColegio = email,
+                        estadoColegio = estado,
+                        estudiantes = estudiantes
+                    )
+                    println("Colegio actualizado: $colegioActualizado")
+                } else {
+                    println("Operación cancelada.")
+                }
             } catch (e: NoSuchElementException) {
                 println("Error: ${e.message}")
             }
         }
 
         fun desactivarColegio(colegios: MutableList<Colegio>) {
-            print("Ingrese el ID del colegio a desactivar: ")
+            println("Ingrese el ID del colegio a desactivar:")
             val id = scanner.next()
-
             try {
                 val colegioDesactivado = ColegioServicio.desactivarColegio(colegios, id)
                 println("Colegio desactivado: $colegioDesactivado")
@@ -85,5 +97,6 @@ class ColegioController(){
                 println("Error: ${e.message}")
             }
         }
+
     }
 }

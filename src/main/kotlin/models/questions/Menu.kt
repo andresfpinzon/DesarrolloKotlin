@@ -140,7 +140,7 @@ class Menu {
             println("1. Crear Brigada")
             println("2. Leer Brigada")
             println("3. Actualizar Brigada")
-            println("4. Eliminar Brigada")
+            println("4. desactivar Brigada")
             println("5. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
@@ -179,7 +179,7 @@ class Menu {
             println("1. Crear Colegio")
             println("2. Leer Colegio")
             println("3. Actualizar Colegio")
-            println("4. Eliminar Colegio")
+            println("4. desactivar Colegio")
             println("5. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
