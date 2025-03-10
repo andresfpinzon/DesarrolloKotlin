@@ -1,4 +1,4 @@
-package models.administrativo.Comando
+package models.administrativo.comando
 
 class Comando(
     val id: String,

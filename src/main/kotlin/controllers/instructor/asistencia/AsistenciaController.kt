@@ -1,5 +1,7 @@
-package models.instructor.asistencia
+package controllers.instructor.asistencia
 
+import models.instructor.asistencia.Asistencia
+import servicios.instructor.asistencia.AsistenciaServicio
 import java.util.Date
 import java.util.Scanner
 

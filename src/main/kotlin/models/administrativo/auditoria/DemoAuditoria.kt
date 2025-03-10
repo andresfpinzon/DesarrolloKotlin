@@ -1,15 +1,15 @@
 package models.administrativo.auditoria
 
-import models.administrativo.auditoria.implement.AuditoriaRepositoryImpl
+import models.administrativo.auditoria.implement.AuditoriaService
 import models.administrativo.auditoria.model.AuditoriaModel
-import models.administrativo.auditoria.services.AuditoriaServices
+import models.administrativo.auditoria.services.AuditoriaController
 import java.util.*
 
 class DemoAuditoria {
 
     companion object {
 
-        private val auditoriaServices = AuditoriaServices(AuditoriaRepositoryImpl())
+        private val auditoriaServices = AuditoriaController(AuditoriaService())
         private val scanner = Scanner(System.`in`)
 
         fun ejecutarDemo() {

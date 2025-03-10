@@ -1,4 +1,4 @@
-package models.administrativo.Comando
+package models.administrativo.comando
 
 import java.util.Scanner
 

@@ -1,9 +1,9 @@
-package models.instructor.calificacion
+package controllers.instructor.calificacion
 
 
 
-import models.instructor.asistencia.AsistenciaController
-import models.instructor.asistencia.AsistenciaController.Companion
+import models.instructor.calificacion.Calificacion
+import servicios.instructor.calificacion.CalificacionServicio
 import java.util.Scanner
 
 class CalificacionController() {
@@ -32,7 +32,7 @@ class CalificacionController() {
 
             if (confirmarAccion("¿Desea crear esta calificacion?")) {
                 try {
-                    val nuevaCalificacion = CalificacionServicios.crearCalificacion(
+                    val nuevaCalificacion = CalificacionServicio.crearCalificacion(
                         calificaciones = calificaciones,
                         id = id,
                         tituloCalificacion = titulo,
@@ -50,7 +50,7 @@ class CalificacionController() {
         }
 
         fun listarCalificacionesActivas(calificaciones: List<Calificacion>) {
-            val calificacionesActivas = CalificacionServicios.listarCalificacionesActivas(calificaciones)
+            val calificacionesActivas = CalificacionServicio.listarCalificacionesActivas(calificaciones)
             if (calificacionesActivas.isEmpty()) {
                 println("No hay calificaciones activas.")
             } else {
@@ -64,7 +64,7 @@ class CalificacionController() {
             val id = scanner.next()
 
             try {
-                val calificacion = CalificacionServicios.buscarCalificacionPorId(calificaciones, id)
+                val calificacion = CalificacionServicio.buscarCalificacionPorId(calificaciones, id)
                 println("Calificación encontrada: $calificacion")
 
                 print("Nuevo título (dejar en blanco para no cambiar): ")
@@ -77,7 +77,7 @@ class CalificacionController() {
                 val estudiantes = scanner.nextLine().takeIf { it.isNotBlank() }?.split(",")
 
                 if (confirmarAccion("¿Desea actualizar esta calificacion?")) {
-                    val calificacionActualizada = CalificacionServicios.actualizarCalificacion(
+                    val calificacionActualizada = CalificacionServicio.actualizarCalificacion(
                         calificaciones = calificaciones,
                         id = id,
                         tituloCalificacion = titulo,
@@ -100,7 +100,7 @@ class CalificacionController() {
             val id = scanner.next()
             if (confirmarAccion("¿Desea desactivar esta caificacion?")){
                 try {
-                    val calificacionDesactivada = CalificacionServicios.desactivarCalificacion(calificaciones, id)
+                    val calificacionDesactivada = CalificacionServicio.desactivarCalificacion(calificaciones, id)
                     println("Calificación desactivada: $calificacionDesactivada")
                 } catch (e: NoSuchElementException) {
                     println("Error: \${e.message}")

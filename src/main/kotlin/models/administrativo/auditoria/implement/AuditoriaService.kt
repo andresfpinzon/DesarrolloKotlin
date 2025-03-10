@@ -3,7 +3,7 @@ package models.administrativo.auditoria.implement
 import models.administrativo.auditoria.model.AuditoriaModel
 import models.administrativo.auditoria.repository.AuditoriaRepository
 
-class AuditoriaRepositoryImpl : AuditoriaRepository {
+class AuditoriaService : AuditoriaRepository {
 
     private val auditoriaDB = mutableMapOf<String, AuditoriaModel>()
 

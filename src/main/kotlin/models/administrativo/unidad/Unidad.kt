@@ -1,4 +1,4 @@
-package models.administrativo.Unidad
+package models.administrativo.unidad
 
 class Unidad(
     val id: String,

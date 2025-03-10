@@ -1,4 +1,4 @@
-package models.administrativo.Brigada
+package models.administrativo.brigada
 
 class Brigada(
     val id: String,

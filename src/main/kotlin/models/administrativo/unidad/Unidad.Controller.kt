@@ -1,4 +1,4 @@
-package models.administrativo.Unidad
+package models.administrativo.unidad
 
 import java.util.Scanner
 

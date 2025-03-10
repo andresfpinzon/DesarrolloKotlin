@@ -3,7 +3,7 @@ package models.administrativo.auditoria.services
 import models.administrativo.auditoria.model.AuditoriaModel
 import models.administrativo.auditoria.repository.AuditoriaRepository
 
-class AuditoriaServices(
+class AuditoriaController(
     private val repository: AuditoriaRepository
 ) {
     // Registrar una nueva auditoría

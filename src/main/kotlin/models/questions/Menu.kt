@@ -2,23 +2,23 @@ package models.questions
 
 import models.secretario.estudiante.Estudiante
 import models.secretario.estudiante.EstudianteController
-import models.instructor.calificacion.*
-import models.instructor.asistencia.AsistenciaController
+import controllers.instructor.asistencia.AsistenciaController
 import models.instructor.asistencia.Asistencia
 
-import models.administrativo.Comando.Comando
-import models.administrativo.Comando.ComandoController
+import models.administrativo.comando.Comando
+import models.administrativo.comando.ComandoController
 
-import models.administrativo.Brigada.Brigada
-import models.administrativo.Brigada.BrigadaController
+import models.administrativo.brigada.Brigada
+import models.administrativo.brigada.BrigadaController
 
-import models.administrativo.Unidad.Unidad
-import models.administrativo.Unidad.UnidadController
+import models.administrativo.unidad.Unidad
+import models.administrativo.unidad.UnidadController
 
-import models.administrativo.colegio.
+import models.administrativo.colegio.Colegio
+import models.administrativo.colegio.ColegioController
 
 
-import models.instructor.calificacion.CalificacionController
+import controllers.instructor.calificacion.CalificacionController
 import models.instructor.calificacion.Calificacion
 
 import java.util.Scanner
@@ -135,6 +135,7 @@ class Menu {
         }
 
         private fun crudBrigada() {
+            var brigadas = mutableListOf(Brigada.Brigada1,Brigada.Brigada2,Brigada.Brigada3)
             println("Acciones CRUD para Brigada:")
             println("1. Crear Brigada")
             println("2. Leer Brigada")
@@ -143,10 +144,10 @@ class Menu {
             println("5. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
-                1 -> println("Crear Brigada")
-                2 -> println("Leer Brigada")
-                3 -> println("Actualizar Brigada")
-                4 -> println("Eliminar Brigada")
+                1 -> BrigadaController.crearBrigada(brigadas)
+                2 -> BrigadaController.actualizarBrigada(brigadas)
+                3 -> BrigadaController.listarBrigadasActivas(brigadas)
+                4 -> BrigadaController.desactivarBrigada(brigadas)
                 5 -> return
                 else -> println("Opción no válida, intente de nuevo.")
             }
@@ -171,6 +172,7 @@ class Menu {
         }
 
         private fun crudColegio() {
+            var colegios = mutableListOf(Colegio.colegio1, Colegio.colegio2)
             println("Acciones CRUD para Colegio:")
             println("1. Crear Colegio")
             println("2. Leer Colegio")
@@ -179,16 +181,17 @@ class Menu {
             println("5. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
-                1 -> println("Crear Colegio")
-                2 -> println("Leer Colegio")
-                3 -> println("Actualizar Colegio")
-                4 -> println("Eliminar Colegio")
+                1 -> ColegioController.crearColegio(colegios)
+                2 -> ColegioController.listarColegiosActivos(colegios)
+                3 -> ColegioController.actualizarColegio(colegios)
+                4 -> ColegioController.desactivarColegio(colegios)
                 5 -> return
                 else -> println("Opción no válida, intente de nuevo.")
             }
         }
 
         private fun crudComando() {
+            var comandos = mutableListOf(Comando.comando1, Comando.comando2)
             println("Acciones CRUD para Comando:")
             println("1. Crear Comando")
             println("2. Leer Comando")
@@ -197,16 +200,17 @@ class Menu {
             println("5. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
-                1 -> println("Crear Comando")
-                2 -> println("Leer Comando")
-                3 -> println("Actualizar Comando")
-                4 -> println("Eliminar Comando")
+                1 -> ComandoController.crearComando(comandos)
+                2 -> ComandoController.listarComandosActivos(comandos)
+                3 -> ComandoController.actualizarComando(comandos)
+                4 -> ComandoController.desactivarComando(comandos)
                 5 -> return
                 else -> println("Opción no válida, intente de nuevo.")
             }
         }
 
         private fun crudUnidad() {
+            var unidades = mutableListOf(Unidad.Unidad1, Unidad.Unidad2, Unidad.Unidad3)
             println("Acciones CRUD para Unidad:")
             println("1. Crear Unidad")
             println("2. Leer Unidad")
@@ -215,10 +219,10 @@ class Menu {
             println("5. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
-                1 -> println("Crear Unidad")
-                2 -> println("Leer Unidad")
-                3 -> println("Actualizar Unidad")
-                4 -> println("Eliminar Unidad")
+                1 -> UnidadController.crearUnidad(unidades)
+                2 -> UnidadController.listarUnidadesActivas(unidades)
+                3 -> UnidadController.actualizarUnidad(unidades)
+                4 -> UnidadController.desactivarUnidad(unidades)
                 5 -> return
                 else -> println("Opción no válida, intente de nuevo.")
             }
@@ -243,7 +247,7 @@ class Menu {
         }
 
         private fun crudAsistencia() {
-            val asistencias = mutableListOf(Asistencia.asistencia1, Asistencia.asistencia2)
+            var asistencias = mutableListOf(Asistencia.asistencia1, Asistencia.asistencia2)
             while (true) {
                 println("Acciones CRUD para Asistencia:")
                 println("1. Crear Asistencia")
@@ -264,7 +268,7 @@ class Menu {
         }
 
         private fun crudCalificacion() {
-            val calificaciones = mutableListOf(Calificacion.calificacion1, Calificacion.calificacion2)
+            var calificaciones = mutableListOf(Calificacion.calificacion1, Calificacion.calificacion2)
             while (true) {
                 println("Acciones CRUD para Calificación:")
                 println("1. Crear Calificación")
@@ -303,7 +307,7 @@ class Menu {
         }
 
         private fun crudEstudiante() {
-            val estudiantes = mutableListOf(Estudiante.estudiante1, Estudiante.estudiante2, Estudiante.estudiante3)
+            var estudiantes = mutableListOf(Estudiante.estudiante1, Estudiante.estudiante2, Estudiante.estudiante3)
             while (true) {
                 println("Acciones CRUD para Estudiante:")
                 println("1. Crear Estudiante")

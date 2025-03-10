@@ -1,6 +1,8 @@
-package models.instructor.calificacion
+package servicios.instructor.calificacion
 
-class CalificacionServicios(){
+import models.instructor.calificacion.Calificacion
+
+class CalificacionServicio(){
     companion object{
 
         fun crearCalificacion(

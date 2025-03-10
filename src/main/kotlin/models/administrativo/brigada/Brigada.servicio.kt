@@ -1,4 +1,4 @@
-package models.administrativo.Brigada
+package models.administrativo.brigada
 
 import java.util.*
 
