@@ -1,33 +1,46 @@
 package models.instructor.asistencia
 
 import java.util.Date
+import java.util.UUID
 
-class Asistencia(
-    val id: String,
-    var tituloAsistencia: String,
-    var fechaAsistencia: Date,
-    var usuarioId: String,
-    var estadoAsistencia: Boolean = true,
-    var estudiantes: List<String>
+data class Asistencia(
+    private val id: String = UUID.randomUUID().toString(),
+    private var tituloAsistencia: String,
+    private var fechaAsistencia: Date,
+    private var usuarioId: String,
+    private var estadoAsistencia: Boolean = true,
+    private var estudiantes: List<String>
 ) {
-    companion object {
-        val asistencia1 = Asistencia(
-            id = "ASIS01",
-            tituloAsistencia = "Clase de Matemáticas",
-            fechaAsistencia = Date(2023, 10, 5),
-            usuarioId = "USR123456",
-            estadoAsistencia = true,
-            estudiantes = listOf("1", "2")
-        )
+    // Getters
+    fun getId(): String = id
+    fun getTituloAsistencia(): String = tituloAsistencia
+    fun getFechaAsistencia(): Date = fechaAsistencia
+    fun getUsuarioId(): String = usuarioId
+    fun getEstadoAsistencia(): Boolean = estadoAsistencia
+    fun getEstudiantes(): List<String> = estudiantes.toList()
 
-        val asistencia2 = Asistencia(
-            id = "ASIS02",
-            tituloAsistencia = "Clase de Ciencias",
-            fechaAsistencia = Date(2023, 10, 6),
-            usuarioId = "USR654321",
-            estadoAsistencia = true,
-            estudiantes = listOf("2", "3")
-        )
+    // Setters con validación básica
+    fun setTituloAsistencia(value: String) {
+        require(value.isNotBlank()) { "El título no puede estar vacío" }
+        tituloAsistencia = value
     }
-}
 
+    fun setFechaAsistencia(value: Date) {
+        fechaAsistencia = value
+    }
+
+    fun setUsuarioId(value: String) {
+        require(value.isNotBlank()) { "El ID de usuario no puede estar vacío" }
+        usuarioId = value
+    }
+
+    fun setEstadoAsistencia(value: Boolean) {
+        estadoAsistencia = value
+    }
+
+    fun setEstudiantes(value: List<String>) {
+        require(value.isNotEmpty()) { "Debe haber al menos un estudiante" }
+        estudiantes = value.toList() // Almacena copia
+    }
+
+}

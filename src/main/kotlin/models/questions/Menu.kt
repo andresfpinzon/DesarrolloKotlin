@@ -3,7 +3,7 @@ package models.questions
 import models.secretario.estudiante.Estudiante
 import models.secretario.estudiante.EstudianteController
 import controllers.instructor.asistencia.AsistenciaController
-import models.instructor.asistencia.Asistencia
+
 
 import models.administrativo.comando.Comando
 import models.administrativo.comando.ComandoController
@@ -23,12 +23,19 @@ import models.instructor.calificacion.Calificacion
 
 import java.util.Scanner
 
+// Inyección de Dependencias
+import di.instructor.asistencia.AsistenciaModule
+
+
 class Menu {
 
     companion object {
         private val scanner = Scanner(System.`in`)
 
         fun accederServicios() {
+
+            val asistenciaController = AsistenciaModule.asistenciaController
+
             while (true) {
                 println("Seleccione el módulo al que desea acceder:")
                 println("1. Administrativo")
@@ -39,7 +46,7 @@ class Menu {
                 print("Opción: ")
                 when (scanner.nextInt()) {
                     1 -> moduloAdministrativo()
-                    2 -> moduloInstructor()
+                    2 -> moduloInstructor(asistenciaController)
                     3 -> moduloRoot()
                     4 -> moduloSecretario()
                     5 -> return
@@ -72,14 +79,14 @@ class Menu {
             }
         }
 
-        private fun moduloInstructor() {
+        private fun moduloInstructor(asistenciaController: AsistenciaController) {
             println("Seleccione el submódulo de Instructor:")
             println("1. Asistencia")
             println("2. Calificación")
             println("3. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
-                1 -> crudAsistencia()
+                1 -> crudAsistencia(asistenciaController)
                 2 -> crudCalificacion()
                 3 -> return
                 else -> println("Opción no válida, intente de nuevo.")
@@ -246,8 +253,7 @@ class Menu {
             }
         }
 
-        private fun crudAsistencia() {
-            var asistencias = mutableListOf(Asistencia.asistencia1, Asistencia.asistencia2)
+        private fun crudAsistencia(asistenciaController: AsistenciaController) {
             while (true) {
                 println("Acciones CRUD para Asistencia:")
                 println("1. Crear Asistencia")
@@ -255,17 +261,16 @@ class Menu {
                 println("3. Actualizar Asistencia")
                 println("4. Desactivar Asistencia")
                 println("5. Volver")
-                print("Opción: ")
                 when (scanner.nextInt()) {
-                    1 -> AsistenciaController.crearAsistencia(asistencias)
-                    2 -> AsistenciaController.listarAsistenciasActivas(asistencias)
-                    3 -> AsistenciaController.actualizarAsistencia(asistencias)
-                    4 -> AsistenciaController.desactivarAsistencia(asistencias)
+                    1 -> asistenciaController.crearAsistencia()
+                    2 -> asistenciaController.listarAsistenciasActivas()
+                    3 -> asistenciaController.actualizarAsistencia()
+                    4 -> asistenciaController.desactivarAsistencia()
                     5 -> return
-                    else -> println("Opción no válida, intente de nuevo.")
                 }
             }
         }
+
 
         private fun crudCalificacion() {
             var calificaciones = mutableListOf(Calificacion.calificacion1, Calificacion.calificacion2)

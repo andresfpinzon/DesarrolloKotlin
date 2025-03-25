@@ -1,70 +1,62 @@
 package servicios.instructor.asistencia
 
 import models.instructor.asistencia.Asistencia
+import repositories.instructor.asistencia.AsistenciaRepository
 import java.util.*
 
-class AsistenciaServicio(){
+class AsistenciaServicio(private val asistenciaRepository: AsistenciaRepository) {
 
-    companion object{
-        fun crearAsistencia(
-            asistencias: MutableList<Asistencia>,
-            id: String,
-            tituloAsistencia: String,
-            fechaAsistencia: Date,
-            usuarioId: String,
-            estadoAsistencia: Boolean = true,
-            estudiantes: List<String> = emptyList()
-        ): Asistencia {
-            if (tituloAsistencia.isBlank() || estudiantes.isEmpty()) {
-                throw IllegalArgumentException("Faltan campos requeridos: tituloAsistencia, estudiantes")
-            }
-
-            val nuevaAsistencia = Asistencia(
-                id = id,
-                tituloAsistencia = tituloAsistencia,
-                fechaAsistencia = fechaAsistencia,
-                usuarioId = usuarioId,
-                estadoAsistencia = estadoAsistencia,
-                estudiantes = estudiantes
-            )
-
-            asistencias.add(nuevaAsistencia)
-            return nuevaAsistencia
+    fun crearAsistencia(
+        tituloAsistencia: String,
+        fechaAsistencia: Date,
+        usuarioId: String,
+        estudiantes: List<String>
+    ): Asistencia {
+        if (tituloAsistencia.isBlank() || estudiantes.isEmpty()) {
+            throw IllegalArgumentException("Faltan campos requeridos: título, estudiantes")
         }
 
-        fun listarAsistenciasActivas(asistencias: List<Asistencia>): List<Asistencia> {
-            return asistencias.filter { it.estadoAsistencia }
-        }
+        val nuevaAsistencia = Asistencia(
+            tituloAsistencia = tituloAsistencia,
+            fechaAsistencia = fechaAsistencia,
+            usuarioId = usuarioId,
+            estudiantes = estudiantes
+        )
 
-        fun obtenerAsistenciaPorId(asistencias: List<Asistencia>, id: String): Asistencia {
-            return asistencias.find { it.id == id } ?: throw NoSuchElementException("Asistencia no encontrada")
-        }
+        asistenciaRepository.crearAsistencia(nuevaAsistencia)
+        return nuevaAsistencia
+    }
 
-        fun actualizarAsistencia(
-            asistencias: MutableList<Asistencia>,
-            id: String,
-            tituloAsistencia: String? = null,
-            fechaAsistencia: Date? = null,
-            usuarioId: String? = null,
-            estadoAsistencia: Boolean? = null,
-            estudiantes: List<String>? = null
-        ): Asistencia {
-            val asistencia = asistencias.find { it.id == id } ?: throw NoSuchElementException("Asistencia no encontrada")
+    fun listarAsistenciasActivas(): List<Asistencia> {
+        return asistenciaRepository.listarAsistenciasActivas()
+    }
 
-            asistencia.tituloAsistencia = tituloAsistencia ?: asistencia.tituloAsistencia
-            asistencia.fechaAsistencia = fechaAsistencia ?: asistencia.fechaAsistencia
-            asistencia.usuarioId = usuarioId ?: asistencia.usuarioId
-            asistencia.estadoAsistencia = estadoAsistencia ?: asistencia.estadoAsistencia
-            asistencia.estudiantes = estudiantes ?: asistencia.estudiantes
+    fun obtenerAsistenciaPorId(id: String): Asistencia {
+        return asistenciaRepository.obtenerAsistenciaPorId(id)
+            ?: throw NoSuchElementException("Asistencia no encontrada")
+    }
 
-            return asistencia
-        }
+    fun actualizarAsistencia(
+        id: String,
+        tituloAsistencia: String?,
+        fechaAsistencia: Date?,
+        usuarioId: String?,
+        estudiantes: List<String>?
+    ): Asistencia {
+        val asistencia = asistenciaRepository.obtenerAsistenciaPorId(id)
+            ?: throw NoSuchElementException("Asistencia no encontrada")
 
-        fun desactivarAsistencia(asistencias: MutableList<Asistencia>, id: String): Asistencia {
-            val asistencia = asistencias.find { it.id == id } ?: throw NoSuchElementException("Asistencia no encontrada")
-            asistencia.estadoAsistencia = false
-            return asistencia
-        }
+        tituloAsistencia?.let { asistencia.setTituloAsistencia(it) }
+        fechaAsistencia?.let { asistencia.setFechaAsistencia(it) }
+        usuarioId?.let { asistencia.setUsuarioId(it) }
+        estudiantes?.let { asistencia.setEstudiantes(it) }
 
+        asistenciaRepository.actualizarAsistencia(asistencia)
+        return asistencia
+    }
+
+    fun desactivarAsistencia(id: String): Asistencia {
+        asistenciaRepository.desactivarAsistencia(id)
+        return asistenciaRepository.obtenerAsistenciaPorId(id)!!
     }
 }
