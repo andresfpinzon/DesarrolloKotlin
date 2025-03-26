@@ -1,37 +1,45 @@
 package models.administrativo.brigada
 
-class Brigada(
-    val id: String,
-    var nombreBrigada: String,
-    var ubicacionBrigada: String,
-    var estadoBrigada: Boolean,
-    var comandoId: String,
-    var unidades: List<String>
-){
-    companion object{
-        val Brigada1 = Brigada(
-            id = "BRIG12391723-91",
-            nombreBrigada = "Brigada 1",
-            ubicacionBrigada = "Cochabamba",
-            estadoBrigada = true,
-            comandoId = "COM123456",
-            unidades = listOf("1", "2")
-        )
-        val Brigada2 = Brigada(
-            id = "BRIG12391723-19",
-            nombreBrigada = "Brigada 2",
-            ubicacionBrigada = "Santa Cruz",
-            estadoBrigada = true,
-            comandoId = "COM654321",
-            unidades = listOf("2", "3")
-        )
-        val Brigada3 = Brigada(
-            id = "BRIG12391723-92",
-            nombreBrigada = "Brigada 3",
-            ubicacionBrigada = "La Paz",
-            estadoBrigada = true,
-            comandoId = "COM123456",
-            unidades = listOf("1", "3")
-        )
+import java.util.UUID
+
+data class Brigada(
+    private val id: String = UUID.randomUUID().toString(),
+    private var nombreBrigada: String,
+    private var ubicacionBrigada: String,
+    private var estadoBrigada: Boolean = true,
+    private var comandoId: String,
+    private var unidades: List<String>
+) {
+    // Getters
+    fun getId(): String = id
+    fun getNombreBrigada(): String = nombreBrigada
+    fun getUbicacionBrigada(): String = ubicacionBrigada
+    fun getEstadoBrigada(): Boolean = estadoBrigada
+    fun getComandoId(): String = comandoId
+    fun getUnidades(): List<String> = unidades.toList()
+
+    // Setters con validación básica
+    fun setNombreBrigada(value: String) {
+        require(value.isNotBlank()) { "El nombre no puede estar vacío" }
+        nombreBrigada = value
+    }
+
+    fun setUbicacionBrigada(value: String) {
+        require(value.isNotBlank()) { "La ubicación no puede estar vacía" }
+        ubicacionBrigada = value
+    }
+
+    fun setEstadoBrigada(value: Boolean) {
+        estadoBrigada = value
+    }
+
+    fun setComandoId(value: String) {
+        require(value.isNotBlank()) { "El ID de comando no puede estar vacío" }
+        comandoId = value
+    }
+
+    fun setUnidades(value: List<String>) {
+        require(value.isNotEmpty()) { "Debe haber al menos una unidad" }
+        unidades = value.toList() // Almacena copia
     }
 }
