@@ -1,10 +1,27 @@
+### Gradle ###
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Gradle Wrapper ###
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
+
 ### IntelliJ IDEA ###
+.idea/
+*.iml
+*.ipr
+*.iws
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
 ### Kotlin ###
-.kotlin
+.kotlin/
+.kotlin_module
 
 ### Eclipse ###
 .apt_generated
@@ -30,3 +47,42 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+._*
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### Variables de entorno ###
+.env
+*.env.local
+*.env.*.local
+
+### Archivos generados ###
+*.log
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+*.temp
+
+### Archivos de sistema ###
+*.orig
+*.rej
+
+### Archivos de usuario ###
+*.suo
+*.user
+*.userprefs
+
+### Archivos de compilación específicos de Kotlin ###
+*.kaptstate
+
+### Archivos de configuración local ###
+local.properties
+
+### Archivos generados por el compilador ###
+**/build/
+**/target/

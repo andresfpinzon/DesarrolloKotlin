@@ -1,20 +1,17 @@
 package models.questions
+import models.administrativo.Usuario
 
-class ConfirmarUsuario(val confirmacion: Boolean) {
+class ConfirmarUsuario() {
 
-    fun verificarEstado() {
-        if (confirmacion) {
-            println("Usuario Activo, Puede ingresar al programa")
-        } else {
-            println("Usuario inactivo, comunicarse con administración para solucionar el problema")
-        }
+    fun verificarEstado(usuario: Usuario): Boolean {
+        return usuario.estadoUsuario
     }
 
-    fun verificarRol() {
-        if (confirmacion) {
-            println("Usted tiene el rol necesario para realizar la acción")
-        } else {
-            println("Lo sentimos, Usted no cuenta con el rol necesario para realizar la acción")
-        }
+    fun verificarRol(usuario: Usuario, rolesPermitidos: List<String>): Boolean {
+        return usuario.roles.any { it in rolesPermitidos }
+    }
+
+    fun verificarUsuario(correo: String, password: String, usuario: Usuario): Boolean {
+        return correo == usuario.correo && password == usuario.password
     }
 }
