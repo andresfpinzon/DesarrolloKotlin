@@ -10,9 +10,9 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
+        dependencies {
     // PostgreSQL
-    implementation("org.postgresql:postgresql:42.7.3")
+    implementation("org.postgresql:postgresql:42.7.5")
 
     //dot env
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")

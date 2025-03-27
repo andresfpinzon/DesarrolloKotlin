@@ -1,6 +1,6 @@
 package models.secretario.curso
 
-class CursoModel (
+class Curso (
     private val id: String,
     private var nombreCurso: String,
     private var descripcionCurso: String,
