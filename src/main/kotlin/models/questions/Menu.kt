@@ -25,7 +25,8 @@ import java.util.Scanner
 // Inyección de Dependencias
 import di.instructor.asistencia.AsistenciaModule
 import di.administrador.brigada.BrigadaModule
-
+import di.administrador.userModule.UserModule
+import di.administrador.userModule.UserModule.userController
 
 
 class Menu {
@@ -37,6 +38,7 @@ class Menu {
 
             val asistenciaController = AsistenciaModule.asistenciaController
             val brigadaController = BrigadaModule.brigadaController
+            val userController = UserModule.userController
 
             while (true) {
                 println("Seleccione el módulo al que desea acceder:")
@@ -247,10 +249,10 @@ class Menu {
             println("5. Volver")
             print("Opción: ")
             when (scanner.nextInt()) {
-                1 -> println("Crear Usuario")
-                2 -> println("Leer Usuario")
-                3 -> println("Actualizar Usuario")
-                4 -> println("Eliminar Usuario")
+                1 -> userController.crearUsuario()
+                2 -> userController.buscarUsuarioPorId()
+                3 -> userController.actualizarUsuario()
+                4 -> userController.desactivarUsuario()
                 5 -> return
                 else -> println("Opción no válida, intente de nuevo.")
             }
