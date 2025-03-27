@@ -12,7 +12,7 @@ class CursoController {
             return scanner.nextLine() == "1"
         }
 
-        fun crearCurso(cursos: MutableList<CursoModel>) {
+        fun crearCurso(cursos: MutableList<Curso>) {
             println("Ingrese los datos del curso:")
             print("ID: ")
             val id = scanner.nextLine()
@@ -47,7 +47,7 @@ class CursoController {
             }
         }
 
-        fun listarCursosActivos(cursos: List<CursoModel>) {
+        fun listarCursosActivos(cursos: List<Curso>) {
             val cursosActivos = CursoServices.listarCursosActivos(cursos)
             if (cursosActivos.isEmpty()) {
                 println("No hay cursos activos.")
@@ -57,7 +57,7 @@ class CursoController {
             }
         }
 
-        fun actualizarCurso(cursos: MutableList<CursoModel>) {
+        fun actualizarCurso(cursos: MutableList<Curso>) {
             print("Ingrese el ID del curso a actualizar: ")
             val id = scanner.nextLine()
 
@@ -92,7 +92,7 @@ class CursoController {
             }
         }
 
-        fun desactivarCurso(cursos: MutableList<CursoModel>) {
+        fun desactivarCurso(cursos: MutableList<Curso>) {
             print("Ingrese el ID del curso a desactivar: ")
             val id = scanner.nextLine()
 
