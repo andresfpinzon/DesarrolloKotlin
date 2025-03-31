@@ -4,6 +4,7 @@ import io.github.cdimascio.dotenv.dotenv
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import models.administrativo.brigada.BrigadaTable
+import models.administrativo.user.model.UsuarioTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -27,6 +28,7 @@ object DatabaseConfig {
         transaction {
             SchemaUtils.createMissingTablesAndColumns(AsistenciasTable)
             SchemaUtils.createMissingTablesAndColumns(BrigadaTable)
+            SchemaUtils.createMissingTablesAndColumns(UsuarioTable)
         }
     }
 }
