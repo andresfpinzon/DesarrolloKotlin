@@ -1,9 +1,7 @@
-package controllers.root.fundacion
+package controllers.root
 
-import models.root.fundacion
-.Fundacion
+import models.root.fundacion.Fundacion
 import servicios.root.fundacion.FundacionServicio
-import java.util.Date
 import java.util.Scanner
 
 class FundacionController() {

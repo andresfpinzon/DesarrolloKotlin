@@ -18,6 +18,7 @@ import models.administrativo.colegio.ColegioController
 
 
 import controllers.instructor.calificacion.CalificacionController
+import controllers.root.FundacionController
 import models.instructor.calificacion.Calificacion
 
 import java.util.Scanner
@@ -27,6 +28,7 @@ import di.instructor.asistencia.AsistenciaModule
 import di.administrador.brigada.BrigadaModule
 import di.administrador.userModule.UserModule
 import di.administrador.userModule.UserModule.userController
+import models.root.fundacion.Fundacion
 
 
 class Menu {
@@ -299,20 +301,33 @@ class Menu {
         }
 
         private fun crudFundacion() {
-            println("Acciones CRUD para Fundación:")
-            println("1. Crear Fundación")
-            println("2. Leer Fundación")
-            println("3. Actualizar Fundación")
-            println("4. Eliminar Fundación")
-            println("5. Volver")
-            print("Opción: ")
-            when (scanner.nextInt()) {
-                1 -> println("Crear Fundación")
-                2 -> println("Leer Fundación")
-                3 -> println("Actualizar Fundación")
-                4 -> println("Eliminar Fundación")
-                5 -> return
-                else -> println("Opción no válida, intente de nuevo.")
+            val fundaciones = mutableListOf(Fundacion.fundacion1)// Lista para almacenar las fundaciones
+
+            while (true) {
+                println("\nAcciones CRUD para Fundación:")
+                println("1. Crear Fundación")
+                println("2. Leer Fundación")
+                println("3. Actualizar Fundación")
+                println("4. Eliminar Fundación")
+                println("5. Volver")
+                print("Opción: ")
+
+                when (scanner.nextInt()) {  // Usamos nextInt() como en tu versión original
+                    1 -> {
+                        FundacionController.crearFundacion(fundaciones)
+                    }
+                    2 -> {
+                        FundacionController.listarFundacionesActivas(fundaciones)
+                    }
+                    3 -> {
+                        FundacionController.actualizarFundacion(fundaciones)
+                    }
+                    4 -> {
+                        FundacionController.desactivarFundacion(fundaciones)
+                    }
+                    5 -> return
+                    else -> println("Opción no válida, intente de nuevo.")
+                }
             }
         }
 
